@@ -38,7 +38,7 @@ class products extends ActiveRecord
             echo '<h3>' . $row['nombre'] . '</h3>';
             echo '<picture>';
             echo '<source srcset="' . $row['webp'] . '" type="image/webp">';
-            echo '<img src="' . $row['jpeg'] . '" alt="" loading="lazy" width="200" height="300">';
+            echo '<img src="' . $row['jpeg'] . '" alt="" loading="lazy" width="300" height="400">';
             echo '</picture>';
             echo '<h4>$' . $row['precio'] . '.00</h4>';
             echo '<h4>Stock: ' . $row['stock'] . '</h4>';
@@ -57,7 +57,7 @@ class products extends ActiveRecord
         if ($_SESSION['administrador'] == 1) {
             $query = 'SELECT * FROM producto';
             $resultProducts = self::$db->query($query);
-            echo '<form action="/admin" method="POST" class="formulario">';
+            echo '<form action="/admin" method="POST" class="formulario form-inline">';
             while ($row = mysqli_fetch_assoc($resultProducts)) {
                 echo '<div class="seccion ProductoDiv">';
                 echo '<h3><input type="text" name="nombre[' . $row['id'] . ']" value="' . $row['nombre'] . '"></h3>';
@@ -70,6 +70,7 @@ class products extends ActiveRecord
                 echo '<div>';
                 echo '<button class="botonCita guardarCambios" type="submit" name="guardarCambios[' . $row['id'] . ']">Guardar Cambios</button>';
                 echo '</div>';
+                echo '<button class="botonCita eliminar" type="submit" name="eliminar[' . $row['id'] . ']">Eliminar</button>';
                 echo '</div>';
             }
             echo '</form>';
@@ -99,4 +100,33 @@ class products extends ActiveRecord
 
         return $resultado;
     }
+
+    public function deleteProduct($id){
+        $query = "DELETE FROM producto WHERE id =$id";
+        $result = self::$db->query($query);
+        return $result;
+    }
+
+    public function addProduct($nombre, $precio, $stock, $img)
+    {
+        try {
+            $webp = '/build/img/' . pathinfo($img, PATHINFO_FILENAME) . '.webp';
+    
+            $query = "INSERT INTO producto (nombre, webp, jpeg, precio, stock) 
+                      VALUES ('$nombre', '$webp', '/build/img/$img', $precio, $stock)";
+    
+            $result = self::$db->query($query);
+    
+            if ($result === false) {
+                throw new \Exception("Error al insertar el producto en la base de datos.");
+            }
+    
+            // Puedes agregar más lógica aquí si es necesario
+    
+        } catch (\Exception $e) {
+            // Manejo de errores: Muestra una alerta o realiza alguna acción
+            echo '<div class="alert alert-danger">' . $e->getMessage() . '</div>';
+        }
+    }
+
 }

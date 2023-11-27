@@ -7,7 +7,7 @@ include_once __DIR__ . "/../templates/alertas.php";
 ?>
 
 <div class="app">
-    <div class="seccion">
+    <div class="seccion deproductos">
         <!-- traer los productos con php -->
         <?php
         $productosInstance = new products();
@@ -34,9 +34,10 @@ include_once __DIR__ . "/../templates/alertas.php";
         <span>Total: $00.00</span>
     </div>
     <div>
-        <a class="botonCita" href="/pagar">Pagar</a>
+        <a class="botonCita" target="_blank" href="https://www.paypal.com/signin">Pagar</a>
     </div>
 </div>
+<a href="/" class="boton">Cerrar Sesión</a>
 </div>
 
 <!-- carrito -->

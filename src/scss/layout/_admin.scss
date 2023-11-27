@@ -1,3 +1,40 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+.form-inline {
+    margin: auto;
+    width: fit-content;
+}
+
+.eliminar{
+    background-color: red;
+}
+
+.crear{
+    background-color: v.$lakersPurple;
+    padding: 2rem;
+    border-radius: 3px;
+
+}
+
+.panel{
+    font-size: 2rem;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    position: fixed; /* Cambiado a fixed */
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Agregado para asegurar que el header esté sobre otros elementos */
+}
+
+.nota{
+    font-size: 10px;
+}
+
+.ProductoDiv:first-of-type{
+    padding-top: 10rem;
+}

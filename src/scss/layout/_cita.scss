@@ -112,28 +112,33 @@
     border-radius: 3px;
 }
 
-.ProductoDiv{
+.ProductoDiv {
     min-width: 100%;
     background-color: hsl(0, 0%, 87%);
     color: #000;
     text-align: center;
     border-radius: 3px;
 
-    picture{
-        width: 20rem;
+    picture {
+        max-width: 100%;  /* Cambiado de min-width a max-width */
         padding: 1rem;
         margin: 1rem;
     }
 
-    h3{
+    h3 {
         color: #000;
-        padding: 2rem;  
+        padding: 2rem;
         margin: 0;
     }
 
-    h4{
-       padding-bottom: -1rem; 
-       margin: 0;
-       padding-top:1rem ;
+    h4 {
+        padding-bottom: -1rem;
+        margin: 0;
+        padding-top: 1rem;
     }
+}
+
+.deproductos {
+    min-width: 40rem;
+    max-width: 40rem;  /* Nuevo estilo para establecer el ancho máximo */
 }
