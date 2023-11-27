@@ -18,6 +18,10 @@ include_once __DIR__ . "/../templates/alertas.php";
         <input type="password" id="confirm_password" placeholder="Tu Contraseña" name="confirm_password" />
     </div>
     
+    <div class="campo">
+        <label for="direccion">Direccion (Calle, Número y Código Postal)</label>
+        <input type="text" id="confirm_password" placeholder="Tu Direccion" name="confirm_password" />
+    </div>
 
     <div class="contenedor-boton">
        <input type="submit" class="boton" value="Restablecer contraseña"/> 

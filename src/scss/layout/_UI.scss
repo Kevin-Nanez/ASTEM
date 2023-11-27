@@ -1,28 +1,36 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-.contenedor-app{
-    @include m.tablet{
-        display: grid;
-        grid-template-columns:2fr 2fr;
-        min-height: 100vh;
-
-    }
-}
-.imagen{
-    height: 20rem;
-    background-image: url(../img/corte.jpg);
-    background-size: cover;
-    background-position: left bottom;
-    @include m.tablet{
-        height: auto;
-        background-position: 25% center;
-    }
-
-}
-
-.app{
+.app {
     width: 95%;
     margin: 0 auto;
     padding: 3rem 1rem;
+
+    @include m.tablet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centrar verticalmente */
+        align-items: center; /* Centrar horizontalmente */
+
+    }
+}
+
+/* Añade este estilo para centrar el formulario en la pantalla */
+.formulario {
+    @include m.tablet {
+        width: 100%; /* Ocupa el 100% del ancho en dispositivos tablet */
+        max-width: 400px; /* Establece un ancho máximo */
+    }
+}
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem; /* Espaciado entre el formulario y los enlaces */
+
+    a {
+        padding: 0.5rem; /* Ajusta el padding según tus necesidades */
+        margin: 0.5rem 0; /* Ajusta el margen según tus necesidades */
+    }
 }

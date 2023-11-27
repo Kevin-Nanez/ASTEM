@@ -7,7 +7,7 @@ class usuario extends ActiveRecord
 {
     //base de datos
     protected static $tabla = 'usuario';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'phone', 'user_password', 'administrador', 'confirmado', 'token'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'phone', 'user_password', 'administrador', 'direccion'];
 
     public $id = null;
     public $nombre = '';
@@ -17,8 +17,7 @@ class usuario extends ActiveRecord
     public $user_password = '';
     public $confirm_password = '';
     public $administrador = null;
-    public $confirmado = null;
-    public $token = '';
+    public $direccion = '';
 
     public function __construct($args = [])
     {
@@ -30,8 +29,7 @@ class usuario extends ActiveRecord
         $this->user_password = $args['user_password'] ?? '';
         $this->confirm_password = $args['confirm_password'] ?? '';
         $this->administrador = $args['admin'] ?? 0;
-        $this->confirmado = $args['confirmado'] ?? 0;
-        $this->token = $args['token'] ?? '';
+        $this->direccion = $args['direccion'] ?? '';
     }
 
     //mensajes de validacion para la creacion de cuentas
@@ -71,11 +69,11 @@ class usuario extends ActiveRecord
             self::$alertas['error'][] = "Fromato de telefono invalido";   
         }
 
-        if (strlen($this->user_password)>=8 ){
+        if (strlen($this->user_password)>=6 ){
             if (!$this->user_password) {
                 self::$alertas['error'][] = "El campo Password es obligatorio";
-            } else if (strlen($this->user_password) < 8) {
-                self::$alertas['error'][] = "La contraseña debe tener 8 caracteres como minimo";
+            } else if (strlen($this->user_password) < 6) {
+                self::$alertas['error'][] = "La contraseña debe tener 6 caracteres como minimo";
             }
     
             if (!$this->confirm_password) {
@@ -85,10 +83,14 @@ class usuario extends ActiveRecord
                 self::$alertas['error'][] = "Las contraseñas no coinciden";
             }
         } else{
-            self::$alertas['error'][] = "Las contraseña debe tener 8 caracteres como minimo";
+            self::$alertas['error'][] = "Las contraseña debe tener 6 caracteres como minimo";
         }
 
-
+        if (!$this->direccion) {
+            self::$alertas['error'][] = "El campo Direccion es obligatorio";
+        } elseif(strlen($this->nombre)>150){
+            self::$alertas['error'][] = "La direccion es demasiado larga";
+        }
  
         return self::$alertas;
     }
@@ -142,12 +144,6 @@ class usuario extends ActiveRecord
         return self::$alertas;
     }
 
-    public function crearToken()
-    {
-        //genera un token unico
-        $this->token = uniqid();
-
-    }
 
     public function primeraMayuscula(){
         $this->nombre = ucfirst($this->nombre) ;
@@ -164,20 +160,7 @@ class usuario extends ActiveRecord
         return self::$alertas;
     }
 
-    public function validarPassword($passwordLoguin)
-    {        
-        if(password_verify($passwordLoguin, $this->user_password)){
-            
-            if($this->confirmado != 1){
-                self::$alertas['error'][] = "Revise su bandeja de entrada para confirmar el correo";
-            }
 
-        } else{
-            self::$alertas['error'][] = "Contraseña Incorrecta";
-        }
-
-        return self::$alertas;
-    }
 
     public function validarEmail(){
         if (!$this->email) {
