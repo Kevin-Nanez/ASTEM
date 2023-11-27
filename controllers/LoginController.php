@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-use Clases\email;
 use Model\usuario;
 use MVC\Router;
 
@@ -30,6 +29,7 @@ class LoginController
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
+                        $_SESSION['administrador'] = $usuario->administrador;
                         $_SESSION['phone'] = $usuario->phone;
                         $_SESSION['login'] = true;
 

@@ -23,12 +23,11 @@ $router->get("/mensaje",[LoginController::class,"mensaje"]);
 
 $router->get("/hola",[LoginController::class,"hola"]);
 
-
-
 $router->get("/admin",[CitaController::class,"admin"]);
 $router->post("/admin",[CitaController::class,"admin"]);
 $router->post("/cita",[CitaController::class,"cita"]);
 $router->get("/cita",[CitaController::class,"cita"]);
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

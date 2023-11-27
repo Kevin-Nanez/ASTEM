@@ -66,9 +66,23 @@
         margin-bottom: 1rem;
 
         .carrito-item {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 4fr 3fr 3fr 1fr; /* Cuatro columnas iguales */
             margin-bottom: 0.5rem;
+
+            &.header {
+                font-weight: bold;
+            }
+        }
+
+        .producto, .cantidad, .precio, .eliminar {
+            text-align: center;
+        }
+
+        .eliminar {
+            cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+            color: black; /* Cambia el color del icono de eliminación */
+            font-weight: 900;
         }
     }
 
@@ -77,6 +91,7 @@
         text-align: center;
     }
 }
+
 
 .botonCita{
     background-color: #424141;
