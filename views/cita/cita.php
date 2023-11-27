@@ -2,19 +2,17 @@
 <p class="descripcion-pagina">Añade al carrito los articulos de tu interés</p>
 
 <?php
+use Model\products;
 include_once __DIR__ . "/../templates/alertas.php";
 ?>
 
 <div class="app">
-    <div id="paso-3" class="seccion">
-        <div class="seccion ProductoDiv">
-            <!-- aqui van a estar los productos traidos de la base de datos -->
-            <picture>
-                <source srcset='/build/img/1.webp' type='image/webp'>
-                <img src='/build/img/1.jpeg' alt='' loading='lazy' width='200' height='300'>
-            </picture>
-        </div>
-
+    <div class="seccion">
+        <!-- traer los productos con php -->
+        <?php
+        $productosInstance = new products();
+        $debug = $productosInstance->imprimirProductos();
+        ?>
     </div>
 
 
@@ -38,7 +36,7 @@ include_once __DIR__ . "/../templates/alertas.php";
             <span>Total: $50.00</span>
         </div>
         <div>
-            <a class="pagar" href="/pagar">Pagar</a>
+            <a class="botonCita" href="/pagar">Pagar</a>
         </div>
     </div>
 
